@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Quote | Sneha Spices</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body style="background-color: var(--bg);">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="contact-info">
+                <span>📞 +91 98765 43210</span>
+                <span>✉️ export@snehaspices.com</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header sticky-header">
+        <div class="container header-grid">
+            <!-- Logo -->
+            <a href="index.html" class="logo-area">
+                <img src="assets/images/logo-sneha-spices.svg" alt="Sneha Spices">
+            </a>
+
+            <!-- Navigation -->
+            <nav class="nav-area">
+                <ul class="nav-menu-inline">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="index.html#timeline">Process</a></li>
+                    <li><a href="inquiry.html" class="active">Start Inquiry</a></li>
+                </ul>
+            </nav>
+
+            <!-- Actions -->
+            <div class="header-actions">
+                <a href="inquiry.html" class="cart-icon-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        class="feather feather-shopping-cart" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-badge" style="display: none;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header / Green Section -->
+    <header class="page-header"
+        style="background-image: url('assets/images/hero-section-sneha-spices.webp'); background-size: cover; background-position: center; position: relative;">
+        <!-- Overlay -->
+        <div style="position: absolute; inset: 0; background: rgba(27, 67, 50, 0.85); z-index: 1;"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <h1>Request a Quote</h1>
+            <p style="opacity: 0.9;">Complete the form below to receive a customized wholesale offer.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="inquiry-layout">
+            <!-- Basket Summary -->
+            <div class="basket-summary">
+                <h3
+                    style="margin-bottom: 1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.5rem; display: inline-block;">
+                    Your Selection</h3>
+                <div id="basketItems">
+                    <!-- Injected via JS -->
+                    <p>Loading basket...</p>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <a href="index.html#products" class="btn btn-outline" style="width: 100%; font-size: 0.9rem;">+ Add
+                        More Products</a>
+                </div>
+            </div>
+
+            <!-- Inquiry Form -->
+            <div class="inquiry-form">
+                <h3 style="margin-bottom: 1.5rem;">Business Details</h3>
+                <form id="inquiryForm">
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label>Company Name *</label>
+                            <input type="text" name="company" class="form-control" placeholder="Global Foods Ltd."
+                                required>
+                        </div>
+                        <div>
+                            <label>Contact Person *</label>
+                            <input type="text" name="contact" class="form-control" placeholder="John Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label>Business Email *</label>
+                            <input type="email" name="email" class="form-control" placeholder="procurement@company.com"
+                                required>
+                        </div>
+                        <div>
+                            <label>Country *</label>
+                            <input type="text" name="country" class="form-control" placeholder="Netherlands" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tax ID / VAT (Optional)</label>
+                        <input type="text" name="taxId" class="form-control" placeholder="NL123456789B01">
+                    </div>
+
+                    <h3 style="margin: 2rem 0 1rem;">Logistics</h3>
+
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label>Preferred Incoterms *</label>
+                            <select name="incoterm" class="form-control" required>
+                                <option value="" disabled selected>Select Option</option>
+                                <option value="FOB">FOB (Free on Board)</option>
+                                <option value="CIF">CIF (Cost, Insurance & Freight)</option>
+                                <option value="CNF">CNF (Cost & Freight)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Port of Discharge *</label>
+                            <input type="text" name="port" class="form-control" placeholder="Any major port" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Requirements</label>
+                        <textarea name="message" class="form-control" rows="4"
+                            placeholder="Specific packaging needs, delivery timeline, or other inquiries..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary"
+                        style="width: 100%; font-size: 1.1rem; padding: 1rem;">Submit Inquiry</button>
+                    <p style="font-size: 0.75rem; color: #6c757d; text-align: center; margin-top: 1rem;">By submitting,
+                        you agree to our privacy policy.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <!-- About -->
+            <div class="footer-col">
+                <h4>About Us</h4>
+                <p>Sneha Spices offers bulk spices, herbs, and culinary ingredients direct to consumers and businesses.
+                </p>
+            </div>
+
+            <!-- Products -->
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#products">Spices</a></li>
+                    <li><a href="index.html#products">Herbs</a></li>
+                    <li><a href="index.html#products">Tea</a></li>
+                    <li><a href="index.html#products">Commodities</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="footer-contact">
+                    <li>Email: info@snehaspices.com</li>
+                    <li>Phone: +91 98765 43210</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Sneha Spices. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/cart.js"></script>
+    <script src="js/inquiry.js"></script>
+</body>
+
+</html>
