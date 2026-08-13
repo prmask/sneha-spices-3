@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProducts('All');
     setupFilters();
     setupSmoothScroll();
+    setupTooltip();
 });
 
 // Render Products
@@ -25,7 +26,11 @@ function renderProducts(category) {
         const imgPath = product.image;
 
         card.innerHTML = `
-      <img src="${imgPath}" alt="${product.name}" class="product-img" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+      <div class="product-img-container" data-id="${product.id}">
+        <div class="product-img-wrapper">
+          <img src="${imgPath}" alt="${product.name}" class="product-img" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+        </div>
+      </div>
       <div class="product-info">
         <h3 class="product-title">${product.name}</h3>
         <p class="product-meta">${product.category} • ${product.origin}</p>
@@ -75,5 +80,86 @@ function setupSmoothScroll() {
                 behavior: 'smooth'
             });
         });
+    });
+}
+
+// Mouse-following Tooltip Logic
+function setupTooltip() {
+    let tooltipEl = document.getElementById('global-tooltip');
+    if (!tooltipEl) {
+        tooltipEl = document.createElement('div');
+        tooltipEl.id = 'global-tooltip';
+        tooltipEl.className = 'product-tooltip';
+        document.body.appendChild(tooltipEl);
+    }
+
+    const grid = document.getElementById('productGrid');
+    if (!grid) return;
+
+    const positionTooltip = (container) => {
+        if (!tooltipEl.classList.contains('visible')) return;
+
+        const rect = container.getBoundingClientRect();
+        
+        // Tooltip dimensions (default estimates if not yet rendered)
+        const tooltipWidth = tooltipEl.offsetWidth || 260;
+        const tooltipHeight = tooltipEl.offsetHeight || 100;
+
+        // Center horizontally above the container
+        let x = rect.left + rect.width / 2 - tooltipWidth / 2;
+        let y = rect.top - tooltipHeight - 15; // 15px gap above the image container
+
+        // Ensure tooltip does not get cut off by screen boundaries
+        if (x < 10) x = 10;
+        if (x + tooltipWidth > window.innerWidth - 10) {
+            x = window.innerWidth - tooltipWidth - 10;
+        }
+
+        // Get sticky header height to avoid overlap
+        const header = document.querySelector('.main-header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const topBoundary = headerHeight + 10;
+
+        if (y < topBoundary) {
+            // If not enough space above, position below the container instead
+            y = rect.bottom + 15;
+        }
+
+        if (y + tooltipHeight > window.innerHeight - 10) {
+            y = window.innerHeight - tooltipHeight - 10;
+        }
+
+        if (y < topBoundary) {
+            y = topBoundary;
+        }
+
+        tooltipEl.style.left = `${x}px`;
+        tooltipEl.style.top = `${y}px`;
+    };
+
+    grid.addEventListener('mouseover', (e) => {
+        const container = e.target.closest('.product-img-container');
+        if (!container) return;
+
+        const productId = container.dataset.id;
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+
+        tooltipEl.innerHTML = `
+      <h4>Indian Sourcing</h4>
+      <p>${product.sourcingDetails || 'Premium export quality crop, sourced from trusted farms in India.'}</p>
+    `;
+        tooltipEl.classList.add('visible');
+        positionTooltip(container);
+    });
+
+    grid.addEventListener('mouseout', (e) => {
+        const container = e.target.closest('.product-img-container');
+        if (!container) return;
+
+        const related = e.relatedTarget;
+        if (related && container.contains(related)) return;
+
+        tooltipEl.classList.remove('visible');
     });
 }
