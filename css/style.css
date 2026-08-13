@@ -693,36 +693,53 @@ img {
 
 /* Footer */
 .main-footer {
-    background-color: #1a1a1a;
-    /* Dark background per screenshot */
-    color: #a0a0a0;
-    /* Light gray text */
-    padding: 4rem 0 2rem;
+    background-color: #f8f9fa; /* Premium light background */
+    border-top: 4px solid var(--primary); /* Deep green top accent bar */
+    color: var(--text); /* Dark body text color */
+    padding: 5rem 0 2.5rem;
     font-size: 0.9rem;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-    border-bottom: 1px solid #333;
-    padding-bottom: 3rem;
+    grid-template-columns: 1.2fr 0.8fr 1.8fr;
+    gap: 4rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 3.5rem;
 }
 
 .footer-col h4 {
-    color: var(--white);
-    font-size: 0.9rem;
+    color: var(--primary); /* Green headers */
+    font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 1.5rem;
+    font-weight: 700;
     font-family: var(--font-sans);
-    /* Clean sans-serif headings */
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--secondary); /* Small gold accent underline */
 }
 
 .footer-col p {
     line-height: 1.6;
-    max-width: 300px;
+    color: #555;
+}
+
+.footer-logo {
+    height: 48px;
+    margin-bottom: 1.25rem;
+    display: block;
 }
 
 .footer-links,
@@ -738,27 +755,106 @@ img {
 }
 
 .footer-links a {
-    color: #a0a0a0;
-    transition: color 0.3s;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.3s, padding-left 0.3s;
 }
 
 .footer-links a:hover {
-    color: var(--white);
+    color: var(--primary);
+    padding-left: 4px; /* Subtle hover slide */
+}
+
+.footer-contact-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Split European and Indian offices side-by-side */
+    gap: 1.5rem;
+}
+
+.footer-contact-block {
+    background: var(--white);
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    border-top: 3px solid var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.footer-contact-block:hover {
+    transform: translateY(-3px);
+}
+
+.footer-contact-block h5 {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-contact-block p {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.footer-contact-block p a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-contact-block p a:hover {
+    color: var(--primary);
+}
+
+.footer-email-block {
+    grid-column: span 2;
+    background: #f0f5f2;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.footer-email-block a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-email-block a:hover {
+    text-decoration: underline;
 }
 
 .footer-bottom {
-    font-size: 0.8rem;
-    color: #666;
+    font-size: 0.85rem;
+    color: #777;
 }
 
-@media (max-width: 768px) {
-    .main-footer {
-        padding: 3rem 0;
-    }
-
+@media (max-width: 992px) {
     .footer-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 2.5rem;
+    }
+    .footer-contact-sections {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-contact-sections {
+        grid-template-columns: 1fr;
+    }
+    .footer-email-block {
+        grid-column: span 1;
     }
 }
 
@@ -1013,38 +1109,18 @@ img {
     line-height: 1.5;
 }
 
-/* Footer Contact Restyling */
-.footer-contact-sections {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-.footer-contact-block h5 {
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 0.35rem;
-    letter-spacing: 0.5px;
-}
-
-.footer-contact-block p {
-    font-size: 0.825rem;
-    color: #a0a0a0;
-    line-height: 1.5;
-    margin-bottom: 0;
-}
-
+/* Footer Contact Restyling - Cleaned/Merged to main block */
 .footer-bottom-links a {
     font-size: 0.85rem;
-    color: #a0a0a0 !important;
+    color: #666 !important;
+    text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer-bottom-links a:hover,
 .footer-bottom-links a.active {
-    color: var(--white) !important;
+    color: var(--primary) !important;
+    text-decoration: underline;
 }
 
 /* Policy Pages Layout */
