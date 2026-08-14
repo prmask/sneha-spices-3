@@ -1,10 +1,43 @@
 // main.js - UI Interactions
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderProducts('All');
+    // Check if query param 'category' exists
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    
+    let initialCategory = 'All';
+    if (categoryParam) {
+        const validCategories = ['Spices', 'Beverages', 'Staples', 'Fruits and vegetables'];
+        if (validCategories.includes(categoryParam)) {
+            initialCategory = categoryParam;
+        }
+    }
+
+    renderProducts(initialCategory);
     setupFilters();
     setupSmoothScroll();
     setupTooltip();
+    setupFooterCategoryIntercept();
+
+    // If initialCategory is not 'All', highlight the correct filter button and scroll to products
+    if (initialCategory !== 'All') {
+        const buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach(btn => {
+            if (btn.dataset.category === initialCategory) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+            // Delay slightly to allow rendering to complete
+            setTimeout(() => {
+                productsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    }
 });
 
 // Render Products
@@ -161,5 +194,41 @@ function setupTooltip() {
         if (related && container.contains(related)) return;
 
         tooltipEl.classList.remove('visible');
+    });
+}
+
+// Intercept footer link clicks if we are on the homepage to switch categories dynamically
+function setupFooterCategoryIntercept() {
+    document.querySelectorAll('.footer-category-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/');
+            if (isHomePage) {
+                e.preventDefault();
+                const category = link.dataset.category;
+                
+                // Update active tab styling
+                const buttons = document.querySelectorAll('.filter-btn');
+                buttons.forEach(btn => {
+                    if (btn.dataset.category === category) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                
+                // Render the selected category products
+                renderProducts(category);
+                
+                // Update URL parameter without triggering a reload
+                const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?category=${encodeURIComponent(category)}#products`;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+                
+                // Scroll down to products
+                const productsSection = document.getElementById('products');
+                if (productsSection) {
+                    productsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
     });
 }
