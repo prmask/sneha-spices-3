@@ -20,4 +20,4 @@ jobs:
           password: ${{ secrets.SNEHASECRET }}
           port: 21
           local-dir: ./   # your site files
-          server-dir: /public_html/test
+          server-dir: /public_html/test/
