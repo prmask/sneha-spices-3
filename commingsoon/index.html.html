@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneha Exim | Launching Soon</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/coming-soon.css?v=1">
+</head>
+
+<body>
+
+    <!-- Background Decoration -->
+    <div class="bg-overlay"></div>
+    <div class="bg-pattern"></div>
+
+    <!-- Header -->
+    <header class="coming-soon-header">
+        <div class="container">
+            <img src="assets/images/logo-sneha-exim.svg" alt="Sneha Exim Logo" class="logo-img">
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-layout">
+        <div class="container">
+            <div class="content-card">
+                <span class="badge-soon">Launching Soon</span>
+                <h1>The Soul of Indian Kitchens<span>Premium Wholesale & Export Quality</span></h1>
+                
+                <p class="intro-text">
+                    Rooted in Kerala's rich agricultural heritage, Sneha Exim sources and exports premium-grade Indian spices, tea, and wholesale staples directly to global markets. We are currently testing our online portal.
+                </p>
+
+                <!-- Countdown Timer -->
+                <div class="countdown-container" id="countdown">
+                    <div class="countdown-box">
+                        <span class="countdown-val" id="days">00</span>
+                        <span class="countdown-lbl">Days</span>
+                    </div>
+                    <div class="countdown-box">
+                        <span class="countdown-val" id="hours">00</span>
+                        <span class="countdown-lbl">Hours</span>
+                    </div>
+                    <div class="countdown-box">
+                        <span class="countdown-val" id="minutes">00</span>
+                        <span class="countdown-lbl">Mins</span>
+                    </div>
+                    <div class="countdown-box">
+                        <span class="countdown-val" id="seconds">00</span>
+                        <span class="countdown-lbl">Secs</span>
+                    </div>
+                </div>
+
+                <!-- Subscription Form -->
+                <form class="subscription-form" id="subscribeForm">
+                    <div class="form-group">
+                        <input type="email" id="emailInput" placeholder="Enter your business email" required autocomplete="email">
+                        <button type="submit" id="submitBtn">
+                            <span>Notify Me</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+
+                <!-- Corporate Info / Wholesalers Contact -->
+                <div class="contact-preview-grid">
+                    <div class="contact-item-box">
+                        <h4>European Sales</h4>
+                        <p>Amstel 1, 1011 PN Amsterdam,<br>Netherlands</p>
+                        <p style="margin-top: 0.4rem;">📞 <a href="tel:+420702823184">+420 702 823 184</a></p>
+                    </div>
+                    <div class="contact-item-box">
+                        <h4>Indian Sourcing Hub</h4>
+                        <p>NH 185, Adimali, Idukki,<br>Kerala 685602, India</p>
+                        <p style="margin-top: 0.4rem;">📞 <a href="tel:+919447560322">+91 94475 60322</a></p>
+                    </div>
+                    <div class="contact-item-box">
+                        <h4>Business Inquiries</h4>
+                        <p>For catalogs, sample requests or export schedules:</p>
+                        <p style="margin-top: 0.4rem; font-weight: 600;">✉️ <a href="mailto:export@snehaexim.com">export@snehaexim.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="coming-soon-footer">
+        <div class="container">
+            <p>&copy; 2026 Sneha Exim. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="impressum.html">Legal Notice</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Countdown and Form Simulation Scripts -->
+    <script>
+        // --- Countdown Timer Logic ---
+        // Launch target: 45 days from today (default configuration)
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 45);
+        targetDate.setHours(12, 0, 0, 0); // 12:00 PM
+
+        const countdownContainer = document.getElementById('countdown');
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate.getTime() - now;
+
+            if (difference <= 0) {
+                if (countdownContainer) {
+                    countdownContainer.innerHTML = "<div style='font-family: var(--font-serif); font-size: 1.5rem; color: var(--secondary);'>We are launching now!</div>";
+                }
+                return;
+            }
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+            daysEl.textContent = d.toString().padStart(2, '0');
+            hoursEl.textContent = h.toString().padStart(2, '0');
+            minutesEl.textContent = m.toString().padStart(2, '0');
+            secondsEl.textContent = s.toString().padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // --- Subscription Form Handler ---
+        const form = document.getElementById('subscribeForm');
+        const emailInput = document.getElementById('emailInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = emailInput.value.trim();
+
+            if (!email) return;
+
+            // Visual loading state
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span>Processing...</span>';
+            formMessage.className = 'form-message';
+            formMessage.textContent = '';
+
+            // Simulate API request (1.2 seconds delay)
+            setTimeout(() => {
+                // Store locally for demo purposes (as it's a static site)
+                try {
+                    let subscribers = JSON.parse(localStorage.getItem('sneha_subscribers') || '[]');
+                    if (!subscribers.includes(email)) {
+                        subscribers.push(email);
+                        localStorage.setItem('sneha_subscribers', JSON.stringify(subscribers));
+                    }
+                } catch(err) {
+                    console.error("Local storage error:", err);
+                }
+
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                submitBtn.innerHTML = originalBtnContent;
+
+                // Show success message
+                formMessage.className = 'form-message success';
+                formMessage.textContent = '✓ Thank you! We will notify you at ' + email + ' upon launch.';
+                emailInput.value = '';
+
+                // Clear message after 5 seconds
+                setTimeout(() => {
+                    formMessage.style.opacity = '0';
+                    setTimeout(() => {
+                        formMessage.textContent = '';
+                        formMessage.style.opacity = '1';
+                    }, 300);
+                }, 5000);
+
+            }, 1200);
+        });
+    </script>
+</body>
+
+</html>
